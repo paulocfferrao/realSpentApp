@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "373707956688",
+    "project_id": "realspentapp",
+    "storage_bucket": "realspentapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:373707956688:android:a68490b3ce7bfe4be7d9d5",
+        "android_client_info": {
+          "package_name": "com.paulocesarferrao.real_spent_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "373707956688-frntmchbefabrpo7o9im7a6e5usas2ai.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQzlorVGMX_nh33EZC17F4up6H1__Lmko"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "373707956688-frntmchbefabrpo7o9im7a6e5usas2ai.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -33,11 +33,11 @@ class _WaitingScreenState extends State<WaitingScreen>
         height: double.infinity,
         child: Center(
           child: TextLiquidFill(
-            text: 'VIRA-LATA CARAMELO',
-            waveColor: kBackgroundColor,
-            boxBackgroundColor: kSecondColor,
+            text: 'Real \$pent',
+            waveColor: Colors.white,
+            boxBackgroundColor: Colors.greenAccent,
             textStyle: TextStyle(
-                fontSize: 50.0,
+                fontSize: 80.0,
                 fontWeight: FontWeight.bold,
                 fontFamily: kMainFont,
                 letterSpacing: 10),
