@@ -5,7 +5,7 @@ import 'package:flutter_masked_text/flutter_masked_text.dart';
 const kBackgroundColor = Colors.white; //Color(0xFFF2B705);
 
 //Segunda cor é usada em botões e outros detalhes
-const kThirdColor = Color(0xFF05AFF2);
+const kThirdColor = Color(0xFF8C0078);
 
 const kSecondColor = Color(0xFF05AFF2);
 
