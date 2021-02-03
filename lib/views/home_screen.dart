@@ -28,6 +28,7 @@ class _Home_screenState extends State<Home_screen>
   //int i = 0;
   @override
   Widget build(BuildContext context) {
+    //TODO: Programar tela inicial do app.
     // double heightScreen = MediaQuery.of(context).size.height;
     // double widthScreen = MediaQuery.of(context).size.width;
     //
