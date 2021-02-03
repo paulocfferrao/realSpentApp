@@ -7,7 +7,7 @@ const kBackgroundColor = Colors.white; //Color(0xFFF2B705);
 //Segunda cor é usada em botões e outros detalhes
 const kThirdColor = Color(0xFF05AFF2);
 
-const kSecondColor = Color(0xFFF2A007);
+const kSecondColor = Color(0xFF05AFF2);
 
 const double kMarginInput = 8.0;
 //const kMessageContainerDecoration = BoxDecoration(
