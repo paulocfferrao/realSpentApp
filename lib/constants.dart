@@ -5,9 +5,9 @@ import 'package:flutter_masked_text/flutter_masked_text.dart';
 const kBackgroundColor = Colors.white; //Color(0xFFF2B705);
 
 //Segunda cor é usada em botões e outros detalhes
-const kThirdColor = Color(0xFF8C0078);
+const kThirdColor = Color(0xFF1BD9C4);
 
-const kSecondColor = Color(0xFF05AFF2);
+const kSecondColor = Color(0xFF8C0078);
 
 const double kMarginInput = 8.0;
 //const kMessageContainerDecoration = BoxDecoration(
@@ -43,6 +43,24 @@ const kHeaderTextStyle = TextStyle(
   fontSize: 30.0,
   fontFamily: kMainFont,
 );
+const kOutcomeTextStyle = TextStyle(
+  color: Colors.redAccent,
+  fontWeight: FontWeight.bold,
+  fontSize: 50.0,
+  fontFamily: kMainFont,
+);
+const kIncomeTextStyle = TextStyle(
+  color: kThirdColor,
+  fontWeight: FontWeight.bold,
+  fontSize: 50.0,
+  fontFamily: kMainFont,
+);
+// const kHeaderTextStyle = TextStyle(
+//   color: kSecondColor,
+//   fontWeight: FontWeight.bold,
+//   fontSize: 30.0,
+//   fontFamily: kMainFont,
+// );
 
 const kInputDecoration = InputDecoration(
 //  filled: false,
