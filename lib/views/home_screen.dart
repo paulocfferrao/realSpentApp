@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:real_spent_app/constants.dart';
+import 'package:real_spent_app/model/Categoria.dart';
+import 'package:real_spent_app/model/Operacao.dart';
+import 'package:real_spent_app/model/Usuario.dart';
 
 class Home_screen extends StatefulWidget {
   static const String id = '/home';
@@ -31,19 +34,15 @@ class _Home_screenState extends State<Home_screen>
 
     var var1 = ["R\$ 10,00", "R\$ 90,00", "- R\$ 80,00"];
     var style = [kIncomeTextStyle, kOutcomeTextStyle, kHeaderTextStyle];
+    var operacao = Operacao("descricao", "tipo", 0.0, DateTime.now());
 
     //
     return Scaffold(
       backgroundColor: kBackgroundColor,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          //TODO: Tela add operação
-          // showModalBottomSheet(
-          //     isScrollControlled: true,
-          //     //enableDrag: false,
-          //     context: context,
-          //     builder: (BuildContext context) => AddProduto());
-          // Add your onPressed code here!
+          operacao.addOperacao(operacao);
+          //Categoria().addCategoria("Alimentação");
         },
         label: Text('Adicionar'),
         icon: Icon(Icons.add_circle),
@@ -86,9 +85,11 @@ class _Home_screenState extends State<Home_screen>
                               ],
                             ),
                             child: Container(
-                              child: Text(
-                                var1[i],
-                                style: style[i],
+                              child: Center(
+                                child: Text(
+                                  var1[i],
+                                  style: style[i],
+                                ),
                               ), //TODO: Alterar para valores do mes
                             ),
                           );
