@@ -23,7 +23,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   bool visibilityAddress = false;
 
   final _auth = FirebaseAuth.instance;
-  final usuarios = FirebaseFirestore.instance.collection("usuarios");
+  //final usuarios = FirebaseFirestore.instance.collection("usuarios");
   Usuario usuario = Usuario.vazio();
 
   @override
@@ -91,10 +91,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                   password: usuario.senha);
 
                           if (newUser != null) {
-                            usuarios.add({
-                              'nome': usuario.nome,
-                              'email': usuario.email,
-                            });
+                            usuario.addUsuario(usuario);
+
+                            // usuarios.add({
+                            //   'nome': usuario.nome,
+                            //   'email': usuario.email,
+                            // });
 
                             Navigator.pushNamed(context, Home_screen.id);
                           } else {
@@ -119,43 +121,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               "Verifique sua conexão com a internet!");
                         }
                       }),
-                      // RoundedButton(kSecondColor, "Avançar", () async {
-                      //   setState(() {
-                      //     visibilityAddress = true;
-                      //     visibilityBasic = false;
-                      //   });
-                      // })
                     ],
                   ),
-                  // Visibility(
-                  //   //Endereço
-                  //   visible: visibilityAddress,
-                  //   child: Column(
-                  //     children: [
-                  //       // inputDefault.inputDefault(
-                  //       //     usuario: usuario,
-                  //       //     field: "CEP",
-                  //       //     textInputType: TextInputType.number),
-                  //       // inputDefault.inputDefault(
-                  //       //   usuario: usuario,
-                  //       //   field: "Rua",
-                  //       // ),
-                  //       // inputDefault.inputDefault(
-                  //       //   usuario: usuario,
-                  //       //   field: "Número",
-                  //       // ),
-                  //       // inputDefault.inputDefault(
-                  //       //   usuario: usuario,
-                  //       //   field: "Complemento",
-                  //       // ),
-                  //       // inputDefault.inputDefault(
-                  //       //   usuario: usuario,
-                  //       //   field: "Bairro",
-                  //       // ),
                   //
-                  //     ],
-                  //   ),
-                  // ),
                 ],
               ),
             ],

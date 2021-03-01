@@ -1,27 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'dart:convert';
-
-import 'package:real_spent_app/model/Categoria.dart';
-import 'package:real_spent_app/model/Usuario.dart';
 
 final operacoes = FirebaseFirestore.instance.collection("operacoes");
 
 class Operacao {
   final String descricao;
   final String tipo; // Receita ou Despesa
-  //final Categoria categoria;
+  final String categoria;
   final double valor;
   final DateTime dataHora;
-  //final Usuario usuario;
+  final String usuario;
 
-  Operacao(
-    this.descricao,
-    this.tipo,
-    //this.categoria,
-    this.valor,
-    this.dataHora,
-    // this.usuario
-  );
+  Operacao(this.descricao, this.tipo, this.categoria, this.valor, this.dataHora,
+      this.usuario);
 
   void addOperacao(Operacao operacao) {
     var map = operacao.toJson();
@@ -32,10 +22,13 @@ class Operacao {
     return {
       'descricao': descricao,
       'tipo': tipo,
-      //'categoria': categoria,
+      'categoria': categoria,
       'valor': valor,
       'dataHora': dataHora,
-      //'usuario': usuario,
+      'usuario': usuario,
     };
   }
+
+  //TODO: criar função buscaOpereaçoes() para retornar operações do usuário logado
+  //TODO: Criar funções para calcular total do mês, entradas e saídas
 }

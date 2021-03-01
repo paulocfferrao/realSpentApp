@@ -1,24 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+final usuarios = FirebaseFirestore.instance.collection("usuarios");
+
 class Usuario {
   String _nome;
-  String _localizacao;
-  String _endereco;
-  String _numero;
-  String _cep;
-  String _complemento;
-  String _bairro;
   String _email;
   String _senha;
 
-  Usuario(this._complemento, this._nome, this._localizacao, this._endereco,
-      this._numero, this._cep, this._bairro, this._email, this._senha);
+  Usuario(this._nome, this._email, this._senha);
 
   Usuario.vazio();
-
-  String get complemento => _complemento;
-
-  set complemento(String value) {
-    _complemento = value;
-  }
 
   @override
   String toString() {
@@ -31,36 +22,6 @@ class Usuario {
     _nome = value;
   }
 
-  String get Localizacao => _localizacao;
-
-  set Localizacao(String value) {
-    _localizacao = value;
-  }
-
-  String get endereco => _endereco;
-
-  set endereco(String value) {
-    _endereco = value;
-  }
-
-  String get numero => _numero;
-
-  set numero(String value) {
-    _numero = value;
-  }
-
-  String get cep => _cep;
-
-  set cep(String value) {
-    _cep = value;
-  }
-
-  String get bairro => _bairro;
-
-  set bairro(String value) {
-    _bairro = value;
-  }
-
   String get email => _email;
 
   set email(String value) {
@@ -71,5 +32,18 @@ class Usuario {
 
   set senha(String value) {
     _senha = value;
+  }
+
+  void addUsuario(Usuario usuario) {
+    var map = usuario.toJson();
+    usuarios.add(map);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'nome': nome,
+      'email': email,
+      'senha': senha,
+    };
   }
 }

@@ -32,31 +32,7 @@ class inputDefault extends StatelessWidget {
                 usuario.nome = value;
               }
               break;
-            case 'Rua':
-              {
-                usuario.endereco = value;
-              }
-              break;
-            case 'Número':
-              {
-                usuario.numero = value;
-              }
-              break;
-            case 'CEP':
-              {
-                usuario.cep = value;
-              }
-              break;
-            case 'Complemento':
-              {
-                usuario.complemento = value;
-              }
-              break;
-            case 'Bairro':
-              {
-                usuario.bairro = value;
-              }
-              break;
+
             case 'Digite seu e-mail':
               {
                 usuario.email = value;

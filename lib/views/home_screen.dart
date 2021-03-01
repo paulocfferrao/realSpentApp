@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:real_spent_app/constants.dart';
-import 'package:real_spent_app/model/Categoria.dart';
 import 'package:real_spent_app/model/Operacao.dart';
-import 'package:real_spent_app/model/Usuario.dart';
+import 'package:real_spent_app/util/datas.dart';
 
 class Home_screen extends StatefulWidget {
   static const String id = '/home';
@@ -34,10 +33,22 @@ class _Home_screenState extends State<Home_screen>
 
     var var1 = ["R\$ 10,00", "R\$ 90,00", "- R\$ 80,00"];
     var style = [kIncomeTextStyle, kOutcomeTextStyle, kHeaderTextStyle];
-    var operacao = Operacao("descricao", "tipo", 0.0, DateTime.now());
+    var operacao = Operacao(
+        "descricao", "tipo", "Saúde", 0.0, DateTime.now(), "email@user");
+    var mesAtual = mesAno();
 
     //
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: kSecondColor,
+        title: Text(
+          mesAtual,
+          style: kTextStyle,
+        ),
+      ),
+      endDrawer: Drawer(
+          //TODO: Relatórios, histórico, Categogias, Logout
+          ),
       backgroundColor: kBackgroundColor,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
@@ -55,7 +66,19 @@ class _Home_screenState extends State<Home_screen>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              //Header(),
+              // Container(
+              //   height: 40,
+              //   width: double.infinity,
+              //   //color: Colors.black,
+              //   child: Row(
+              //     children: [
+              //       Text(
+              //         mesAtual,
+              //         style: kTextStyle,
+              //       ),
+              //     ],
+              //   ),
+              // ),
               SizedBox(
                 width: double.maxFinite,
                 height: 180,
