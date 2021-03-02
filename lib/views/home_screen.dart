@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:real_spent_app/constants.dart';
 import 'package:real_spent_app/model/Operacao.dart';
 import 'package:real_spent_app/util/datas.dart';
+import 'package:real_spent_app/views/operacao_screen.dart';
 
 class Home_screen extends StatefulWidget {
   static const String id = '/home';
@@ -33,8 +34,8 @@ class _Home_screenState extends State<Home_screen>
 
     var var1 = ["R\$ 10,00", "R\$ 90,00", "- R\$ 80,00"];
     var style = [kIncomeTextStyle, kOutcomeTextStyle, kHeaderTextStyle];
-    var operacao = Operacao(
-        "descricao", "tipo", "Saúde", 0.0, DateTime.now(), "email@user");
+    // var operacao = Operacao(
+    //"descricao", "tipo", "Saúde", "0.0", DateTime.now(), "email@user");
     var mesAtual = mesAno();
 
     //
@@ -52,7 +53,7 @@ class _Home_screenState extends State<Home_screen>
       backgroundColor: kBackgroundColor,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          operacao.addOperacao(operacao);
+          Navigator.pushNamed(context, OperacaoScreen.id);
           //Categoria().addCategoria("Alimentação");
         },
         label: Text('Adicionar'),
