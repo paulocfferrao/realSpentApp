@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:real_spent_app/components/rounded_button.dart';
 import 'package:real_spent_app/constants.dart';
 import 'package:real_spent_app/model/Operacao.dart';
+import 'package:real_spent_app/model/Usuario.dart';
 import 'package:real_spent_app/views/home_screen.dart';
 
 class OperacaoScreen extends StatefulWidget {
@@ -92,7 +93,8 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
                   controller: kTextMoeda,
                   textAlign: TextAlign.center,
                   onChanged: (value) {
-                    operacao.valor = value;
+                    operacao.valor =
+                        kTextMoeda.numberValue.toString().replaceAll(".", ",");
                   },
                   keyboardType: TextInputType.number,
                   decoration: kInputDecoration.copyWith(hintText: 'Valor'),
@@ -102,6 +104,18 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
                 ),
                 RoundedButton(kSecondColor, 'Cadastrar', () async {
                   //TODO: Inserir usuario logado e data
+                  var dataAtual = DateTime.now();
+                  operacao.dataHora = dataAtual.year.toString() +
+                      "." +
+                      dataAtual.month.toString() +
+                      "." +
+                      dataAtual.day.toString() +
+                      "." +
+                      dataAtual.hour.toString() +
+                      "" +
+                      dataAtual.minute.toString();
+
+                  operacao.usuario = auth.currentUser.email;
                   operacao.addOperacao(operacao);
                   Navigator.pushNamed(context, Home_screen.id);
                 }),

@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 final usuarios = FirebaseFirestore.instance.collection("usuarios");
+FirebaseAuth auth = FirebaseAuth.instance;
 
 class Usuario {
   String _nome;
@@ -45,5 +47,9 @@ class Usuario {
       'email': email,
       'senha': senha,
     };
+  }
+
+  String emailLogado() {
+    return auth.currentUser.email;
   }
 }

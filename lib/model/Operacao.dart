@@ -7,7 +7,7 @@ class Operacao {
   String _tipo; // Receita ou Despesa
   String _categoria;
   String _valor;
-  DateTime _dataHora;
+  String _dataHora;
   String _usuario;
 
   Operacao(this._descricao, this._tipo, this._categoria, this._valor,
@@ -55,9 +55,9 @@ class Operacao {
     _valor = value;
   }
 
-  DateTime get dataHora => _dataHora;
+  String get dataHora => _dataHora;
 
-  set dataHora(DateTime value) {
+  set dataHora(String value) {
     _dataHora = value;
   }
 
