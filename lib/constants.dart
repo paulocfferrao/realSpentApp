@@ -55,12 +55,12 @@ const kIncomeTextStyle = TextStyle(
   fontSize: 50.0,
   fontFamily: kMainFont,
 );
-// const kHeaderTextStyle = TextStyle(
-//   color: kSecondColor,
-//   fontWeight: FontWeight.bold,
-//   fontSize: 30.0,
-//   fontFamily: kMainFont,
-// );
+const kInTextStyle = TextStyle(
+  color: kThirdColor,
+  fontWeight: FontWeight.bold,
+  fontSize: 20.0,
+  fontFamily: kMainFont,
+);
 
 const kInputDecoration = InputDecoration(
 //  filled: false,
