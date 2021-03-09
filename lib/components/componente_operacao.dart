@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:real_spent_app/constants.dart';
 
-TextButton operacaoButton(descricao, categoria, valor, tipo) {
+TextButton componenteOperacao(descricao, categoria, valor, tipo) {
+  var estilo;
+  if (tipo == "Entrada") {
+    estilo = kIncomeTextStyle;
+  } else {
+    estilo = kOutcomeTextStyle;
+  }
+
   return TextButton(
     onPressed: null,
     onLongPress: null,
@@ -18,17 +25,17 @@ TextButton operacaoButton(descricao, categoria, valor, tipo) {
             children: [
               Text(
                 descricao,
-                style: kInTextStyle,
+                style: estilo.copyWith(fontSize: 30.0),
               ),
               Text(
                 categoria,
-                style: kInTextStyle.copyWith(color: Colors.black),
+                style: estilo.copyWith(color: Colors.black, fontSize: 20.0),
               ),
             ],
           ),
           Text(
             "R\$ " + valor,
-            style: kInTextStyle.copyWith(fontSize: 30),
+            style: estilo.copyWith(fontSize: 30.0),
           ),
         ],
       ),

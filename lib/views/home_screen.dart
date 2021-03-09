@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:real_spent_app/components/OperacaoButton.dart';
+import 'package:real_spent_app/components/ListaOperacoes.dart';
+import 'package:real_spent_app/components/componente_operacao.dart';
 import 'package:real_spent_app/constants.dart';
 import 'package:real_spent_app/model/Operacao.dart';
 import 'package:real_spent_app/model/Usuario.dart';
@@ -20,7 +21,7 @@ class _Home_screenState extends State<Home_screen>
     super.initState();
   }
 
-  var operacoes = operacao.listaOperacoes(auth.currentUser.email);
+  // var operacoes = operacao.listaOperacoes(auth.currentUser.email);
 
 //
 //  @override
@@ -117,10 +118,14 @@ class _Home_screenState extends State<Home_screen>
                 height: heightScreen - 170 - 94,
                 child: ListView(
                   children: [
-                    operacaoButton("Almoço", "Alimentação", "25,00", "Saída"),
-                    // operacaoButton(),
-                    // operacaoButton(),
+                    ListaOperacoes(),
                   ],
+                  // componenteOperacao(
+                  //     "Almoço", "Alimentação", "25,00", "Saída"),
+                  // componenteOperacao(
+                  //     "Salário", "Renda", "20005,00", "Entrada"),
+                  // operacaoButton(),
+                  // operacaoButton(),
                 ),
               ),
             ],
