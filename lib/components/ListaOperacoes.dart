@@ -11,30 +11,39 @@ class ListaOperacoes extends StatefulWidget {
 
 class _ListaOperacoesState extends State<ListaOperacoes> {
   List<Widget> componentes = [];
+  List<Operacao> listaOperacoes = [];
   preenche(String emailAtual) async {
     final _operacoes = FirebaseFirestore.instance.collection("operacoes");
 
     await for (var snapshot in _operacoes.snapshots()) {
       for (var operacao in snapshot.docs) {
-        //Operacao novaOperacao = Operacao.vazio();
-        var usuario = operacao.data()['usuario'];
+        Operacao novaOperacao = Operacao.vazio();
+        novaOperacao.usuario = operacao.data()['usuario'];
 
-        if (emailAtual == usuario) {
-          var descricao = operacao.data()['descricao'];
-          var tipo = operacao.data()['tipo'];
-          var categoria = operacao.data()['categoria'];
-          var valor = operacao.data()['valor'];
-          var dataHora = operacao.data()['dataHora'];
+        if (emailAtual == novaOperacao.usuario) {
+          novaOperacao.descricao = operacao.data()['descricao'];
+          novaOperacao.tipo = operacao.data()['tipo'];
+          novaOperacao.categoria = operacao.data()['categoria'];
+          novaOperacao.valor = operacao.data()['valor'];
+          novaOperacao.dataHora = operacao.data()['dataHora'];
 
-          setState(() {
-            componentes
-                .add(componenteOperacao(descricao, categoria, valor, tipo));
-            //TODO: Listar por data
-          });
+          listaOperacoes.add(novaOperacao);
         }
 
         //print(estabelecimento.data());
       }
+      setState(() {
+        listaOperacoes.sort((a, b) => b.dataHora.compareTo(a.dataHora));
+
+        setState(() {
+          for (var op in listaOperacoes) {
+            componentes.add(componenteOperacao(
+                op.descricao, op.categoria, op.valor, op.tipo));
+          }
+        });
+
+        //TODO: Listar por data
+      });
     }
   }
 
