@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:real_spent_app/model/Usuario.dart';
 
 final operacoes = FirebaseFirestore.instance.collection("operacoes");
 
 class Operacao {
+  String _id;
   String _descricao;
   String _tipo; // Receita ou Despesa
   String _categoria;
@@ -23,21 +22,11 @@ class Operacao {
     _descricao = value;
   }
 
-  void addOperacao(Operacao operacao) {
-    var map = operacao.toJson();
-    operacoes.add(map);
+  set id(String value) {
+    _id = value;
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'descricao': _descricao,
-      'tipo': _tipo,
-      'categoria': _categoria,
-      'valor': _valor,
-      'dataHora': _dataHora,
-      'usuario': _usuario,
-    };
-  }
+  String get id => _id;
 
   String get tipo => _tipo;
 
@@ -72,10 +61,24 @@ class Operacao {
 //TODO: criar função buscaOpereaçoes() para retornar operações do usuário logado
   //TODO: Criar funções para calcular total do mês, entradas e saídas
 
-  // List<Operacao> listaOperacoes(emailAtual) {
-  //   buscaOpereacoes(emailAtual);
-  //
-  //   return operacoesAux;
-  // }
+  Map<String, dynamic> toJson() {
+    return {
+      'descricao': _descricao,
+      'tipo': _tipo,
+      'categoria': _categoria,
+      'valor': _valor,
+      'dataHora': _dataHora,
+      'usuario': _usuario,
+    };
+  }
 
+  void addOperacao(Operacao operacao) {
+    var map = operacao.toJson();
+    operacoes.add(map);
+  }
+
+  static deletarOperacao(String id) async {
+    var _operacoes = FirebaseFirestore.instance.collection("operacoes");
+    _operacoes.doc(id).delete();
+  }
 }

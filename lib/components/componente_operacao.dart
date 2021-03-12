@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:real_spent_app/constants.dart';
+import 'package:real_spent_app/model/Operacao.dart';
 
-TextButton componenteOperacao(descricao, categoria, valor, tipo) {
+longPress(id) {
+  print(id);
+  //
+}
+
+TextButton componenteOperacao(descricao, categoria, valor, tipo, id) {
   var estilo;
   if (tipo == "Entrada") {
     estilo = kIncomeTextStyle;
@@ -9,12 +15,20 @@ TextButton componenteOperacao(descricao, categoria, valor, tipo) {
     estilo = kOutcomeTextStyle;
   }
 
+  var _width = double.infinity;
+  var _height = 80.0;
+
   return TextButton(
-    onPressed: null,
-    onLongPress: null,
+    onPressed: () {
+      //TODO: Confirmação de exclusão e recarregar home
+      Operacao.deletarOperacao(id);
+
+      print(id);
+    },
+    //nLongPress: null,
     child: Container(
-      width: double.infinity,
-      height: 80,
+      width: _width,
+      height: _height,
       //color: Colors.grey,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

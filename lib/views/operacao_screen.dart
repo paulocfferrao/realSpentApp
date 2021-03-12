@@ -79,7 +79,7 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
                   height: kMarginInput,
                 ),
                 TextField(
-                  //TODO: Select
+                  //TODO: Select (carregar cadastradas)
                   textAlign: TextAlign.center,
                   onChanged: (value) {
                     operacao.categoria = value;

@@ -13,6 +13,8 @@ class _ListaOperacoesState extends State<ListaOperacoes> {
   List<Widget> componentes = [];
   List<Operacao> listaOperacoes = [];
   preenche(String emailAtual) async {
+    componentes.clear();
+    listaOperacoes.clear();
     final _operacoes = FirebaseFirestore.instance.collection("operacoes");
 
     await for (var snapshot in _operacoes.snapshots()) {
@@ -26,7 +28,7 @@ class _ListaOperacoesState extends State<ListaOperacoes> {
           novaOperacao.categoria = operacao.data()['categoria'];
           novaOperacao.valor = operacao.data()['valor'];
           novaOperacao.dataHora = operacao.data()['dataHora'];
-
+          novaOperacao.id = operacao.id;
           listaOperacoes.add(novaOperacao);
         }
 
@@ -38,11 +40,11 @@ class _ListaOperacoesState extends State<ListaOperacoes> {
         setState(() {
           for (var op in listaOperacoes) {
             componentes.add(componenteOperacao(
-                op.descricao, op.categoria, op.valor, op.tipo));
+                op.descricao, op.categoria, op.valor, op.tipo, op.id));
           }
         });
 
-        //TODO: Listar por data
+        //TODO: Limitar operações do mes
       });
     }
   }
