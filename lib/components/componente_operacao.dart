@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:real_spent_app/constants.dart';
 import 'package:real_spent_app/model/Operacao.dart';
+import 'package:confirm_dialog/confirm_dialog.dart';
+import 'package:real_spent_app/views/home_screen.dart';
 
 longPress(id) {
   print(id);
   //
 }
 
-TextButton componenteOperacao(descricao, categoria, valor, tipo, id) {
+TextButton componenteOperacao(descricao, categoria, valor, tipo, id, context) {
   var estilo;
   if (tipo == "Entrada") {
     estilo = kIncomeTextStyle;
@@ -19,13 +21,21 @@ TextButton componenteOperacao(descricao, categoria, valor, tipo, id) {
   var _height = 80.0;
 
   return TextButton(
-    onPressed: () {
-      //TODO: Confirmação de exclusão e recarregar home
-      Operacao.deletarOperacao(id);
-
-      print(id);
+    onLongPress: () async {
+      if (await confirm(
+        context,
+        title: Text('Confirmar exclusão'),
+        content: Text('Tem certeza que deseja excluir a operação?'),
+        textOK: Text('Sim'),
+        textCancel: Text('Não'),
+      )) {
+        Operacao.deletarOperacao(id);
+        Navigator.pop(context);
+        Navigator.pushNamed(context, Home_screen.id);
+      }
+      //return print('pressedCancel');
     },
-    //nLongPress: null,
+    //onPressed: null,
     child: Container(
       width: _width,
       height: _height,

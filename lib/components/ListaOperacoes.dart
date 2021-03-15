@@ -12,7 +12,7 @@ class ListaOperacoes extends StatefulWidget {
 class _ListaOperacoesState extends State<ListaOperacoes> {
   List<Widget> componentes = [];
   List<Operacao> listaOperacoes = [];
-  preenche(String emailAtual) async {
+  preenche(String emailAtual, context) async {
     componentes.clear();
     listaOperacoes.clear();
     final _operacoes = FirebaseFirestore.instance.collection("operacoes");
@@ -40,7 +40,7 @@ class _ListaOperacoesState extends State<ListaOperacoes> {
         setState(() {
           for (var op in listaOperacoes) {
             componentes.add(componenteOperacao(
-                op.descricao, op.categoria, op.valor, op.tipo, op.id));
+                op.descricao, op.categoria, op.valor, op.tipo, op.id, context));
           }
         });
 
@@ -51,12 +51,13 @@ class _ListaOperacoesState extends State<ListaOperacoes> {
 
   @override
   void initState() {
-    preenche(auth.currentUser.email);
+    preenche(auth.currentUser.email, context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    //preenche(auth.currentUser.email, context);
     return Column(
       //crossAxisAlignment: CrossAxisAlignment.stretch,
       children: componentes,

@@ -116,6 +116,7 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
 
                   operacao.usuario = auth.currentUser.email;
                   operacao.addOperacao(operacao);
+                  Navigator.pop(context);
                   Navigator.pushNamed(context, Home_screen.id);
                 }),
                 //
