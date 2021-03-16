@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:real_spent_app/constants.dart';
 import 'package:real_spent_app/model/Operacao.dart';
 import 'package:confirm_dialog/confirm_dialog.dart';
+import 'package:real_spent_app/util/ScreenArguments.dart';
 import 'package:real_spent_app/views/home_screen.dart';
+import 'package:real_spent_app/views/operacao_screen.dart';
 
 longPress(id) {
   print(id);
@@ -35,7 +37,11 @@ TextButton componenteOperacao(descricao, categoria, valor, tipo, id, context) {
       }
       //return print('pressedCancel');
     },
-    //onPressed: null,
+    onPressed: () {
+      Operacao operacao = Operacao(descricao, tipo, categoria, valor, "", "");
+      Navigator.pushNamed(context, OperacaoScreen.id,
+          arguments: ScreenArguments(operacao, id));
+    },
     child: Container(
       width: _width,
       height: _height,

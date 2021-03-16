@@ -81,4 +81,10 @@ class Operacao {
     var _operacoes = FirebaseFirestore.instance.collection("operacoes");
     _operacoes.doc(id).delete();
   }
+
+  static editarOperacao(String id, operacao) async {
+    var _operacoes = FirebaseFirestore.instance.collection("operacoes");
+    var map = operacao.toJson();
+    _operacoes.doc(id).update(map);
+  }
 }

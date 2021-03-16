@@ -3,6 +3,7 @@ import 'package:real_spent_app/components/rounded_button.dart';
 import 'package:real_spent_app/constants.dart';
 import 'package:real_spent_app/model/Operacao.dart';
 import 'package:real_spent_app/model/Usuario.dart';
+import 'package:real_spent_app/util/ScreenArguments.dart';
 import 'package:real_spent_app/views/home_screen.dart';
 
 class OperacaoScreen extends StatefulWidget {
@@ -11,13 +12,29 @@ class OperacaoScreen extends StatefulWidget {
   _OperacaoScreenState createState() => _OperacaoScreenState();
 }
 
-String dropdownValue = 'Selecione o tipo';
-Color dropColor = kSecondColor;
-Operacao operacao = Operacao.vazio();
+String dropdownValue;
+Color dropColor;
+Operacao operacao;
 
 class _OperacaoScreenState extends State<OperacaoScreen> {
   @override
   Widget build(BuildContext context) {
+    final ScreenArguments args = ModalRoute.of(context).settings.arguments;
+
+    if (args == null) {
+      dropdownValue = 'Selecione o tipo';
+      dropColor = kSecondColor;
+      operacao = Operacao.vazio();
+    } else {
+      operacao = args.operacao;
+      kTextMoeda.text = operacao.valor == null ? null : operacao.valor;
+      dropdownValue = operacao.tipo;
+      if (operacao.tipo == "Entrada") {
+        dropColor = Colors.lightGreen;
+      } else {
+        dropColor = Colors.redAccent;
+      }
+    }
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: Padding(
@@ -68,7 +85,9 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
                 SizedBox(
                   height: 30.0,
                 ),
-                TextField(
+                TextFormField(
+                  initialValue:
+                      operacao.descricao == null ? "" : operacao.descricao,
                   textAlign: TextAlign.center,
                   onChanged: (value) {
                     operacao.descricao = value;
@@ -78,7 +97,10 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
                 SizedBox(
                   height: kMarginInput,
                 ),
-                TextField(
+                TextFormField(
+                  initialValue:
+                      operacao.categoria == null ? "" : operacao.categoria,
+
                   //TODO: Select (carregar cadastradas)
                   textAlign: TextAlign.center,
                   onChanged: (value) {
@@ -89,8 +111,9 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
                 SizedBox(
                   height: kMarginInput,
                 ),
-                TextField(
-                  controller: kTextMoeda,
+                TextFormField(
+                  controller:
+                      kTextMoeda, //todo: inserir valor recebido por paremetro com o controller
                   textAlign: TextAlign.center,
                   onChanged: (value) {
                     operacao.valor =
@@ -115,7 +138,12 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
                       dataAtual.minute.toString();
 
                   operacao.usuario = auth.currentUser.email;
-                  operacao.addOperacao(operacao);
+                  if (args == null) {
+                    operacao.addOperacao(operacao);
+                  } else {
+                    Operacao.editarOperacao(args.id, operacao);
+                  }
+
                   Navigator.pop(context);
                   Navigator.pushNamed(context, Home_screen.id);
                 }),
