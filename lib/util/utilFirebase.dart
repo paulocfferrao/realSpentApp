@@ -3,22 +3,24 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:real_spent_app/components/ListaOperacoes.dart';
 import 'package:real_spent_app/views/home_screen.dart';
 import 'package:real_spent_app/views/welcome_screen.dart';
+import 'package:real_spent_app/globals.dart' as globals;
 
 class UtilFirebase {
   testUser(context) async {
     await Firebase.initializeApp();
+    // if(!globals.flag){
+    //   ListaOperacoes();//todo: atualizar o valor de globals.teste antes de carregar a home
+    // }
+
     FirebaseAuth auth = FirebaseAuth.instance;
 
     if (auth.currentUser != null) {
-      bool eEstabelecimento = await verificaEstabelecimento();
       Navigator.pop(context);
-      if (!eEstabelecimento) {
-        Navigator.pushNamed(context, Home_screen.id);
-      } else {
-        // Navigator.pushNamed(context, HomeEstabelecimentoScreen.id);
-      }
+
+      Navigator.pushNamed(context, Home_screen.id);
     } else {
       Navigator.pop(context);
       Navigator.pushNamed(context, WelcomeScreen.id);

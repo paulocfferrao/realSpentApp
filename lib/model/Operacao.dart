@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:real_spent_app/globals.dart' as globals;
 
 final operacoes = FirebaseFirestore.instance.collection("operacoes");
 
@@ -75,16 +76,23 @@ class Operacao {
   void addOperacao(Operacao operacao) {
     var map = operacao.toJson();
     operacoes.add(map);
+    // globals.totalEntradas = 0.0;
+    // globals.totalSaidas = 0.0;
+    // globals.flag = false;
   }
 
   static deletarOperacao(String id) async {
-    var _operacoes = FirebaseFirestore.instance.collection("operacoes");
-    _operacoes.doc(id).delete();
+    //operacoes = FirebaseFirestore.instance.collection("operacoes");
+    operacoes.doc(id).delete();
+    //globals.flag = false;
   }
 
   static editarOperacao(String id, operacao) async {
-    var _operacoes = FirebaseFirestore.instance.collection("operacoes");
+    //var _operacoes = FirebaseFirestore.instance.collection("operacoes");
     var map = operacao.toJson();
-    _operacoes.doc(id).update(map);
+    operacoes.doc(id).update(map);
+    // globals.totalEntradas = 0.0;
+    // globals.totalSaidas = 0.0;
+    // globals.flag = false;
   }
 }

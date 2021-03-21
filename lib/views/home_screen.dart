@@ -1,12 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:real_spent_app/components/ListaOperacoes.dart';
-import 'package:real_spent_app/components/componente_operacao.dart';
 import 'package:real_spent_app/constants.dart';
-import 'package:real_spent_app/model/Operacao.dart';
-import 'package:real_spent_app/model/Usuario.dart';
 import 'package:real_spent_app/util/datas.dart';
 import 'package:real_spent_app/views/operacao_screen.dart';
+import 'package:real_spent_app/globals.dart' as globals;
 
 class Home_screen extends StatefulWidget {
   static const String id = '/home';
@@ -21,26 +21,17 @@ class _Home_screenState extends State<Home_screen>
     super.initState();
   }
 
-  // var operacoes = operacao.listaOperacoes(auth.currentUser.email);
-
-//
-//  @override
-//  void dispose() {
-//
-//    super.dispose();
-//  }
-
-  //int i = 0;
   @override
   Widget build(BuildContext context) {
     //TODO: Programar tela inicial do app.
-    // double heightScreen = MediaQuery.of(context).size.height;
-    // double widthScreen = MediaQuery.of(context).size.width;
 
-    var var1 = ["R\$ 10,00", "R\$ 90,00", "- R\$ 80,00"];
+    String totalEntradas = "R\$ " + globals.totalEntradas.toString();
+    String totalSaidas = "R\$ " + globals.totalSaidas.toString();
+    String total = "R\$ " +
+        dp((globals.totalEntradas - globals.totalSaidas), 2).toString();
+
+    var var1 = [totalEntradas, totalSaidas, total];
     var style = [kIncomeTextStyle, kOutcomeTextStyle, kHeaderTextStyle];
-    var operacao = Operacao("descricao", "tipo", "Saúde", "120.0",
-        "2021.03.05.23.03", "email@user");
     var mesAtual = mesAno();
 
     //
@@ -120,12 +111,6 @@ class _Home_screenState extends State<Home_screen>
                   children: [
                     ListaOperacoes(),
                   ],
-                  // componenteOperacao(
-                  //     "Almoço", "Alimentação", "25,00", "Saída"),
-                  // componenteOperacao(
-                  //     "Salário", "Renda", "20005,00", "Entrada"),
-                  // operacaoButton(),
-                  // operacaoButton(),
                 ),
               ),
             ],
@@ -134,4 +119,9 @@ class _Home_screenState extends State<Home_screen>
       ),
     );
   }
+}
+
+double dp(double val, int places) {
+  double mod = pow(10.0, places);
+  return ((val * mod).round().toDouble() / mod);
 }

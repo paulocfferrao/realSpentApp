@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:real_spent_app/components/rounded_button.dart';
 import 'package:real_spent_app/constants.dart';
 import 'package:real_spent_app/model/Operacao.dart';
@@ -12,22 +13,19 @@ class OperacaoScreen extends StatefulWidget {
   _OperacaoScreenState createState() => _OperacaoScreenState();
 }
 
-String dropdownValue;
-Color dropColor;
+String dropdownValue = 'Selecione o tipo';
+Color dropColor = kSecondColor;
 Operacao operacao;
 
 class _OperacaoScreenState extends State<OperacaoScreen> {
   @override
   Widget build(BuildContext context) {
     final ScreenArguments args = ModalRoute.of(context).settings.arguments;
-
     if (args == null) {
-      dropdownValue = 'Selecione o tipo';
-      dropColor = kSecondColor;
-      operacao = Operacao.vazio();
+      operacao = operacao == null ? Operacao.vazio() : operacao;
     } else {
       operacao = args.operacao;
-      kTextMoeda.text = operacao.valor == null ? null : operacao.valor;
+      kTextMoeda.text = operacao.valor;
       dropdownValue = operacao.tipo;
       if (operacao.tipo == "Entrada") {
         dropColor = Colors.lightGreen;
@@ -35,6 +33,7 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
         dropColor = Colors.redAccent;
       }
     }
+
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: Padding(
@@ -71,6 +70,7 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
                         dropColor = kSecondColor;
                       }
                       dropdownValue = newValue;
+                      //debugger();
                       operacao.tipo = newValue;
                     });
                   },
@@ -143,9 +143,9 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
                   } else {
                     Operacao.editarOperacao(args.id, operacao);
                   }
-
+                  operacao = null;
                   Navigator.pop(context);
-                  Navigator.pushNamed(context, Home_screen.id);
+                  //Navigator.pushNamed(context, Home_screen.id);
                 }),
                 //
               ],

@@ -6,11 +6,6 @@ import 'package:real_spent_app/util/ScreenArguments.dart';
 import 'package:real_spent_app/views/home_screen.dart';
 import 'package:real_spent_app/views/operacao_screen.dart';
 
-longPress(id) {
-  print(id);
-  //
-}
-
 TextButton componenteOperacao(descricao, categoria, valor, tipo, id, context) {
   var estilo;
   if (tipo == "Entrada") {
