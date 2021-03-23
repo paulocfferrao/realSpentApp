@@ -4,7 +4,6 @@ import 'package:real_spent_app/components/componente_operacao.dart';
 import 'package:real_spent_app/model/Operacao.dart';
 import 'package:real_spent_app/model/Usuario.dart';
 import 'package:real_spent_app/globals.dart' as globals;
-import 'package:real_spent_app/views/home_screen.dart';
 
 class ListaOperacoes extends StatefulWidget {
   @override
@@ -16,15 +15,14 @@ class _ListaOperacoesState extends State<ListaOperacoes> {
   List<Operacao> listaOperacoes = [];
 
   preenche(String emailAtual, context) async {
-    componentes.clear();
-    listaOperacoes.clear();
-
-    double totalEntradas = 0.0;
-    double totalSaidas = 0.0;
-
     final _operacoes = FirebaseFirestore.instance.collection("operacoes");
 
     await for (var snapshot in _operacoes.snapshots()) {
+      componentes.clear();
+      listaOperacoes.clear();
+
+      double totalEntradas = 0.0;
+      double totalSaidas = 0.0;
       for (var operacao in snapshot.docs) {
         Operacao novaOperacao = Operacao.vazio();
         novaOperacao.usuario = operacao.data()['usuario'];
@@ -41,6 +39,7 @@ class _ListaOperacoesState extends State<ListaOperacoes> {
           if (novaOperacao.tipo == "Entrada") {
             totalEntradas +=
                 double.parse(novaOperacao.valor.replaceAll(",", "."));
+            print(totalEntradas.toString() + " if ");
           } else if (novaOperacao.tipo == "Saída") {
             totalSaidas +=
                 double.parse(novaOperacao.valor.replaceAll(",", "."));
@@ -49,19 +48,24 @@ class _ListaOperacoesState extends State<ListaOperacoes> {
       }
       setState(() {
         listaOperacoes.sort((a, b) => b.dataHora.compareTo(a.dataHora));
-        globals.totalEntradas = totalEntradas;
-        globals.totalSaidas = totalSaidas;
+        globals.totalEntradas.value = totalEntradas;
+        globals.totalSaidas.value = totalSaidas;
+        globals.total.value = totalEntradas - totalSaidas;
+
+        print(globals.totalSaidas.toString() + " --Saídas - ListaOperações");
+        print(
+            globals.totalEntradas.toString() + " --Entradas - ListaOperações");
 
         for (var op in listaOperacoes) {
           componentes.add(componenteOperacao(
               op.descricao, op.categoria, op.valor, op.tipo, op.id, context));
         }
 
-        if (!globals.flag) {
-          Navigator.pop(context);
-          Navigator.pushNamed(context, Home_screen.id);
-          globals.flag = true;
-        }
+        // if (!globals.flag) {
+        //   Navigator.pop(context);
+        //   Navigator.pushNamed(context, Home_screen.id);
+        //   globals.flag = true;
+        // }
         //TODO: Limitar operações do mes
       });
     }

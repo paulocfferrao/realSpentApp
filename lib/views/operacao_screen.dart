@@ -5,7 +5,7 @@ import 'package:real_spent_app/constants.dart';
 import 'package:real_spent_app/model/Operacao.dart';
 import 'package:real_spent_app/model/Usuario.dart';
 import 'package:real_spent_app/util/ScreenArguments.dart';
-import 'package:real_spent_app/views/home_screen.dart';
+//todo: garantir campos em branco nas próximas instancias da tela
 
 class OperacaoScreen extends StatefulWidget {
   static const String id = '/operacao';
@@ -113,7 +113,7 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
                 ),
                 TextFormField(
                   controller:
-                      kTextMoeda, //todo: inserir valor recebido por paremetro com o controller
+                      kTextMoeda, //todo: Bug na edição de operação: mostrando um zero a menos
                   textAlign: TextAlign.center,
                   onChanged: (value) {
                     operacao.valor =
@@ -144,7 +144,9 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
                     Operacao.editarOperacao(args.id, operacao);
                   }
                   operacao = null;
+                  //globals.flag = false;
                   Navigator.pop(context);
+
                   //Navigator.pushNamed(context, Home_screen.id);
                 }),
                 //

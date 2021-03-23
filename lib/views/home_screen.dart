@@ -1,9 +1,11 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:real_spent_app/components/ListaOperacoes.dart';
 import 'package:real_spent_app/constants.dart';
+import 'package:real_spent_app/util/buildValueListenableBuilder.dart';
 import 'package:real_spent_app/util/datas.dart';
 import 'package:real_spent_app/views/operacao_screen.dart';
 import 'package:real_spent_app/globals.dart' as globals;
@@ -25,13 +27,18 @@ class _Home_screenState extends State<Home_screen>
   Widget build(BuildContext context) {
     //TODO: Programar tela inicial do app.
 
-    String totalEntradas = "R\$ " + globals.totalEntradas.toString();
-    String totalSaidas = "R\$ " + globals.totalSaidas.toString();
-    String total = "R\$ " +
-        dp((globals.totalEntradas - globals.totalSaidas), 2).toString();
+    //Text total = ;
 
-    var var1 = [totalEntradas, totalSaidas, total];
-    var style = [kIncomeTextStyle, kOutcomeTextStyle, kHeaderTextStyle];
+    print(globals.totalSaidas.toString() + " --Saídas - HOme");
+    print(globals.totalEntradas.toString() + " --Entradas - Home");
+
+    var valores = [
+      Vlb.buildValueListenableBuilder(globals.totalEntradas, kIncomeTextStyle),
+      Vlb.buildValueListenableBuilder(globals.totalSaidas, kOutcomeTextStyle),
+      Vlb.buildValueListenableBuilder(globals.total, kHeaderTextStyle)
+    ];
+
+    //var style = [kIncomeTextStyle, kOutcomeTextStyle, kHeaderTextStyle];
     var mesAtual = mesAno();
 
     //
@@ -93,10 +100,7 @@ class _Home_screenState extends State<Home_screen>
                         ),
                         child: Container(
                           child: Center(
-                            child: Text(
-                              var1[i],
-                              style: style[i],
-                            ),
+                            child: valores[i],
                           ), //TODO: Alterar para valores do mes
                         ),
                       );
