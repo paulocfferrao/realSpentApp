@@ -1,9 +1,8 @@
 import 'dart:math';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:real_spent_app/components/ListaOperacoes.dart';
+import 'package:real_spent_app/components/menu.dart';
 import 'package:real_spent_app/constants.dart';
 import 'package:real_spent_app/util/buildValueListenableBuilder.dart';
 import 'package:real_spent_app/util/datas.dart';
@@ -25,8 +24,6 @@ class _Home_screenState extends State<Home_screen>
 
   @override
   Widget build(BuildContext context) {
-    //TODO: Programar tela inicial do app.
-
     //Text total = ;
 
     print(globals.totalSaidas.toString() + " --Saídas - HOme");
@@ -50,9 +47,7 @@ class _Home_screenState extends State<Home_screen>
           style: kTextStyle,
         ),
       ),
-      endDrawer: Drawer(
-          //TODO: Relatórios, histórico, Categogias, Logout
-          ),
+      endDrawer: Menu(),
       backgroundColor: kBackgroundColor,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {

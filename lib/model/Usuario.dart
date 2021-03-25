@@ -1,5 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:real_spent_app/util/utilFirebase.dart';
+import 'package:real_spent_app/views/waitingScreen.dart';
+import 'package:real_spent_app/views/welcome_screen.dart';
 
 final usuarios = FirebaseFirestore.instance.collection("usuarios");
 FirebaseAuth auth = FirebaseAuth.instance;
@@ -49,7 +53,13 @@ class Usuario {
     };
   }
 
-  String emailLogado() {
-    return auth.currentUser.email;
+  static String emailLogado() {
+    return auth.currentUser.email == null ? null : auth.currentUser.email;
+  }
+
+  static void sair(context) {
+    auth.signOut();
+    Navigator.pop(context);
+    Navigator.pushNamed(context, WelcomeScreen.id);
   }
 }
