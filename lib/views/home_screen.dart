@@ -32,7 +32,8 @@ class _Home_screenState extends State<Home_screen>
     var valores = [
       Vlb.buildValueListenableBuilder(globals.totalEntradas, kIncomeTextStyle),
       Vlb.buildValueListenableBuilder(globals.totalSaidas, kOutcomeTextStyle),
-      Vlb.buildValueListenableBuilder(globals.total, kHeaderTextStyle)
+      Vlb.buildValueListenableBuilder(
+          globals.total, kHeaderTextStyle) //todo: arredondamento
     ];
 
     //var style = [kIncomeTextStyle, kOutcomeTextStyle, kHeaderTextStyle];

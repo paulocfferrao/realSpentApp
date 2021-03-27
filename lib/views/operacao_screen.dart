@@ -15,14 +15,28 @@ class OperacaoScreen extends StatefulWidget {
 
 String dropdownValue = 'Selecione o tipo';
 Color dropColor = kSecondColor;
-Operacao operacao;
+Operacao operacao = null;
+int c = 0; //Contador para controlar se dropdown já foi utilizado
 
 class _OperacaoScreenState extends State<OperacaoScreen> {
+  @override
+  void initState() {
+    c = 0;
+    //  operacao = null;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final ScreenArguments args = ModalRoute.of(context).settings.arguments;
     if (args == null) {
       operacao = operacao == null ? Operacao.vazio() : operacao;
+
+      if (c == 0) {
+        kTextMoeda.text = "0,00";
+        dropdownValue = "Selecione o tipo";
+        dropColor = kSecondColor;
+      }
     } else {
       operacao = args.operacao;
       kTextMoeda.text = operacao.valor;
@@ -70,7 +84,7 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
                         dropColor = kSecondColor;
                       }
                       dropdownValue = newValue;
-                      //debugger();
+                      c++;
                       operacao.tipo = newValue;
                     });
                   },
@@ -143,7 +157,7 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
                   } else {
                     Operacao.editarOperacao(args.id, operacao);
                   }
-                  operacao = null;
+                  // operacao = null;
                   //globals.flag = false;
                   Navigator.pop(context);
 
