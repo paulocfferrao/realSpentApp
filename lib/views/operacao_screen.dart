@@ -5,7 +5,6 @@ import 'package:real_spent_app/constants.dart';
 import 'package:real_spent_app/model/Operacao.dart';
 import 'package:real_spent_app/model/Usuario.dart';
 import 'package:real_spent_app/util/ScreenArguments.dart';
-//todo: garantir campos em branco nas próximas instancias da tela
 
 class OperacaoScreen extends StatefulWidget {
   static const String id = '/operacao';

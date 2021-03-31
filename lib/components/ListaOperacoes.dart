@@ -26,20 +26,21 @@ class _ListaOperacoesState extends State<ListaOperacoes> {
       for (var operacao in snapshot.docs) {
         Operacao novaOperacao = Operacao.vazio();
         novaOperacao.usuario = operacao.data()['usuario'];
+        novaOperacao.dataHora = operacao.data()['dataHora'];
 
-        if (emailAtual == novaOperacao.usuario) {
+        if (emailAtual == novaOperacao.usuario &&
+            mesCorrente(novaOperacao.dataHora)) {
           novaOperacao.descricao = operacao.data()['descricao'];
           novaOperacao.tipo = operacao.data()['tipo'];
           novaOperacao.categoria = operacao.data()['categoria'];
           novaOperacao.valor = operacao.data()['valor'];
-          novaOperacao.dataHora = operacao.data()['dataHora'];
+
           novaOperacao.id = operacao.id;
           listaOperacoes.add(novaOperacao);
 
           if (novaOperacao.tipo == "Entrada") {
             totalEntradas +=
                 double.parse(novaOperacao.valor.replaceAll(",", "."));
-            print(totalEntradas.toString() + " if ");
           } else if (novaOperacao.tipo == "Saída") {
             totalSaidas +=
                 double.parse(novaOperacao.valor.replaceAll(",", "."));
@@ -66,7 +67,6 @@ class _ListaOperacoesState extends State<ListaOperacoes> {
         //   Navigator.pushNamed(context, Home_screen.id);
         //   globals.flag = true;
         // }
-        //TODO: Limitar operações do mes
       });
     }
   }
@@ -83,5 +83,23 @@ class _ListaOperacoesState extends State<ListaOperacoes> {
       //crossAxisAlignment: CrossAxisAlignment.stretch,
       children: componentes,
     );
+  }
+}
+
+bool mesCorrente(String dataHora) {
+  ///EX.:2021.11.19.16.58
+  ///    2021.3.22.21.47
+
+  String mesAtual = new DateTime.now().month.toString();
+  int inicio = dataHora.indexOf(".") + 1;
+  String aux = dataHora.substring(inicio);
+  int fim = aux.indexOf(".") + inicio;
+  String mesOperacao =
+      dataHora.substring(inicio, fim); //erro para meses com dois digitos
+
+  if (mesOperacao == mesAtual) {
+    return true;
+  } else {
+    return false;
   }
 }
