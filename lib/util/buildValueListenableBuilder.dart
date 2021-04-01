@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 
 class Vlb {
@@ -6,6 +8,7 @@ class Vlb {
     return ValueListenableBuilder(
       valueListenable: globalValue,
       builder: (context, value, _) {
+        value = dp(value, 2);
         return Text(
           "R\$ $value",
           style: style,
@@ -13,4 +16,9 @@ class Vlb {
       },
     );
   }
+}
+
+double dp(double val, int places) {
+  double mod = pow(10.0, places);
+  return ((val * mod).round().toDouble() / mod);
 }

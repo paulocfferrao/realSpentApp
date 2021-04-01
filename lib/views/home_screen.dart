@@ -24,11 +24,6 @@ class _Home_screenState extends State<Home_screen>
 
   @override
   Widget build(BuildContext context) {
-    //Text total = ;
-
-    print(globals.totalSaidas.toString() + " --Saídas - HOme");
-    print(globals.totalEntradas.toString() + " --Entradas - Home");
-
     var valores = [
       Vlb.buildValueListenableBuilder(globals.totalEntradas, kIncomeTextStyle),
       Vlb.buildValueListenableBuilder(globals.totalSaidas, kOutcomeTextStyle),
@@ -97,7 +92,7 @@ class _Home_screenState extends State<Home_screen>
                         child: Container(
                           child: Center(
                             child: valores[i],
-                          ), //TODO: Alterar para valores do mes
+                          ),
                         ),
                       );
                     });
@@ -119,9 +114,4 @@ class _Home_screenState extends State<Home_screen>
       ),
     );
   }
-}
-
-double dp(double val, int places) {
-  double mod = pow(10.0, places);
-  return ((val * mod).round().toDouble() / mod);
 }
