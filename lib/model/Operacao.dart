@@ -59,9 +59,6 @@ class Operacao {
     _usuario = value;
   }
 
-//TODO: criar função buscaOpereaçoes() para retornar operações do usuário logado
-  //TODO: Criar funções para calcular total do mês, entradas e saídas
-
   Map<String, dynamic> toJson() {
     return {
       'descricao': _descricao,
@@ -73,26 +70,29 @@ class Operacao {
     };
   }
 
+  static Operacao toObject(operacao) {
+    Operacao novaOperacao = Operacao.vazio();
+    novaOperacao.usuario = operacao.data()['usuario'];
+    novaOperacao.dataHora = operacao.data()['dataHora'];
+    novaOperacao.descricao = operacao.data()['descricao'];
+    novaOperacao.tipo = operacao.data()['tipo'];
+    novaOperacao.categoria = operacao.data()['categoria'];
+    novaOperacao.valor = operacao.data()['valor'];
+    novaOperacao.id = operacao.id;
+    return novaOperacao;
+  }
+
   void addOperacao(Operacao operacao) {
     var map = operacao.toJson();
     operacoes.add(map);
-    // globals.totalEntradas = 0.0;
-    // globals.totalSaidas = 0.0;
-    // globals.flag = false;
   }
 
   static deletarOperacao(String id) async {
-    //operacoes = FirebaseFirestore.instance.collection("operacoes");
     operacoes.doc(id).delete();
-    //globals.flag = false;
   }
 
   static editarOperacao(String id, operacao) async {
-    //var _operacoes = FirebaseFirestore.instance.collection("operacoes");
     var map = operacao.toJson();
     operacoes.doc(id).update(map);
-    // globals.totalEntradas = 0.0;
-    // globals.totalSaidas = 0.0;
-    // globals.flag = false;
   }
 }

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:real_spent_app/components/rounded_button.dart';
 import 'package:real_spent_app/constants.dart';
+import 'package:real_spent_app/model/Categoria.dart';
 import 'package:real_spent_app/model/Operacao.dart';
 import 'package:real_spent_app/model/Usuario.dart';
 import 'package:real_spent_app/util/ScreenArguments.dart';
+import 'package:real_spent_app/globals.dart' as globals;
 
 class OperacaoScreen extends StatefulWidget {
   static const String id = '/operacao';
@@ -13,15 +15,23 @@ class OperacaoScreen extends StatefulWidget {
 }
 
 String dropdownValue = 'Selecione o tipo';
+String dropdownValueCat = 'Selecione a categoria';
+
 Color dropColor = kSecondColor;
+Color dropColorCat = kSecondColor;
+
+//List<String> categorias = Categoria.getCategorias();
+
 Operacao operacao = null;
 int c = 0; //Contador para controlar se dropdown já foi utilizado
 
 class _OperacaoScreenState extends State<OperacaoScreen> {
   @override
   void initState() {
+    //categorias = Categoria.getCategorias();
     c = 0;
-    //  operacao = null;
+    operacao = null;
+
     super.initState();
   }
 
@@ -34,12 +44,14 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
       if (c == 0) {
         kTextMoeda.text = "0,00";
         dropdownValue = "Selecione o tipo";
+        dropdownValueCat = 'Selecione a categoria';
         dropColor = kSecondColor;
       }
     } else {
       operacao = args.operacao;
       kTextMoeda.text = operacao.valor;
       dropdownValue = operacao.tipo;
+      dropdownValueCat = operacao.categoria;
       if (operacao.tipo == "Entrada") {
         dropColor = Colors.lightGreen;
       } else {
@@ -95,32 +107,59 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
                     );
                   }).toList(),
                 ),
+
                 SizedBox(
-                  height: 30.0,
+                  height: 20.0,
+                ),
+                DropdownButton<String>(
+                  isExpanded: true,
+                  value: dropdownValueCat,
+                  icon: Icon(
+                    Icons.arrow_downward,
+                  ),
+                  iconSize: 24,
+                  elevation: 16,
+                  style: TextStyle(color: kSecondColor),
+                  underline: Container(
+                    height: 2,
+                    color: dropColorCat,
+                  ),
+                  onChanged: (String newValue) {
+                    setState(() {
+                      // if (newValue == "Saída") {
+                      //   dropColor = Colors.redAccent;
+                      // } else if (newValue == "Entrada") {
+                      //   dropColor = Colors.lightGreen;
+                      // } else {
+                      //   dropColor = kSecondColor;
+                      // }
+                      dropdownValueCat = newValue; //CategoriaDrop
+                      // c++;
+                      operacao.categoria = newValue;
+                    });
+                  },
+                  items: globals.gCategorias
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+                SizedBox(
+                  height: 20.0,
                 ),
                 TextFormField(
                   initialValue:
                       operacao.descricao == null ? "" : operacao.descricao,
                   textAlign: TextAlign.center,
                   onChanged: (value) {
+                    //debugger();
                     operacao.descricao = value;
                   },
                   decoration: kInputDecoration.copyWith(hintText: 'Descrição'),
                 ),
-                SizedBox(
-                  height: kMarginInput,
-                ),
-                TextFormField(
-                  initialValue:
-                      operacao.categoria == null ? "" : operacao.categoria,
 
-                  //TODO: Select (carregar cadastradas)
-                  textAlign: TextAlign.center,
-                  onChanged: (value) {
-                    operacao.categoria = value;
-                  },
-                  decoration: kInputDecoration.copyWith(hintText: 'Categoria'),
-                ),
                 SizedBox(
                   height: kMarginInput,
                 ),
@@ -158,6 +197,7 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
                   }
                   // operacao = null;
                   //globals.flag = false;
+                  c = 0;
                   Navigator.pop(context);
 
                   //Navigator.pushNamed(context, Home_screen.id);

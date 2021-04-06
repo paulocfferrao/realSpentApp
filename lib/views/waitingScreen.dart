@@ -1,5 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:real_spent_app/model/Categoria.dart';
 import 'package:real_spent_app/util/utilFirebase.dart';
 import 'package:real_spent_app/constants.dart';
 
@@ -20,7 +21,7 @@ class _WaitingScreenState extends State<WaitingScreen>
 
   @override
   void dispose() {
-    // TODO: implement dispose
+    Categoria.listaCategorias();
     super.dispose();
   }
 

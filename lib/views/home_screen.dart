@@ -1,9 +1,11 @@
 import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:real_spent_app/components/ListaOperacoes.dart';
 import 'package:real_spent_app/components/menu.dart';
 import 'package:real_spent_app/constants.dart';
+import 'package:real_spent_app/model/Operacao.dart';
 import 'package:real_spent_app/util/buildValueListenableBuilder.dart';
 import 'package:real_spent_app/util/datas.dart';
 import 'package:real_spent_app/views/operacao_screen.dart';
@@ -25,10 +27,9 @@ class _Home_screenState extends State<Home_screen>
   @override
   Widget build(BuildContext context) {
     var valores = [
-      Vlb.buildValueListenableBuilder(globals.totalEntradas, kIncomeTextStyle),
-      Vlb.buildValueListenableBuilder(globals.totalSaidas, kOutcomeTextStyle),
-      Vlb.buildValueListenableBuilder(
-          globals.total, kHeaderTextStyle) //todo: arredondamento
+      Vlb.buildValueListenableBuilder(globals.gTotalEntradas, kIncomeTextStyle),
+      Vlb.buildValueListenableBuilder(globals.gTotalSaidas, kOutcomeTextStyle),
+      Vlb.buildValueListenableBuilder(globals.gTotal, kHeaderTextStyle)
     ];
 
     //var style = [kIncomeTextStyle, kOutcomeTextStyle, kHeaderTextStyle];
@@ -47,6 +48,7 @@ class _Home_screenState extends State<Home_screen>
       backgroundColor: kBackgroundColor,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
+          //tempAtualizaCaterias();
           Navigator.pushNamed(context, OperacaoScreen.id);
           //Categoria().addCategoria("Alimentação");
         },
@@ -115,3 +117,18 @@ class _Home_screenState extends State<Home_screen>
     );
   }
 }
+
+// void tempAtualizaCaterias() async {
+//   final _operacoes = FirebaseFirestore.instance.collection("operacoes");
+//
+//   await for (var snapshot in _operacoes.snapshots()) {
+//     for (var operacao in snapshot.docs) {
+//       var nOperacao = Operacao.toObject(operacao);
+//       nOperacao.categoria = "Alimentação";
+//       print(nOperacao.categoria);
+//       Operacao.editarOperacao(operacao.id, nOperacao);
+//     }
+//   }
+//
+//   print("ok");
+// }

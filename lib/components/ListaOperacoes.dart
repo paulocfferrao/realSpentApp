@@ -49,13 +49,13 @@ class _ListaOperacoesState extends State<ListaOperacoes> {
       }
       setState(() {
         listaOperacoes.sort((a, b) => b.dataHora.compareTo(a.dataHora));
-        globals.totalEntradas.value = totalEntradas;
-        globals.totalSaidas.value = totalSaidas;
-        globals.total.value = totalEntradas - totalSaidas;
+        globals.gTotalEntradas.value = totalEntradas;
+        globals.gTotalSaidas.value = totalSaidas;
+        globals.gTotal.value = totalEntradas - totalSaidas;
 
-        print(globals.totalSaidas.toString() + " --Saídas - ListaOperações");
+        print(globals.gTotalSaidas.toString() + " --Saídas - ListaOperações");
         print(
-            globals.totalEntradas.toString() + " --Entradas - ListaOperações");
+            globals.gTotalEntradas.toString() + " --Entradas - ListaOperações");
 
         for (var op in listaOperacoes) {
           componentes.add(componenteOperacao(
