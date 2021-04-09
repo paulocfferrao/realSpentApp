@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:real_spent_app/components/rounded_button.dart';
 import 'package:real_spent_app/constants.dart';
-import 'package:real_spent_app/model/Categoria.dart';
 import 'package:real_spent_app/model/Operacao.dart';
 import 'package:real_spent_app/model/Usuario.dart';
 import 'package:real_spent_app/util/ScreenArguments.dart';
@@ -126,15 +125,7 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
                   ),
                   onChanged: (String newValue) {
                     setState(() {
-                      // if (newValue == "Saída") {
-                      //   dropColor = Colors.redAccent;
-                      // } else if (newValue == "Entrada") {
-                      //   dropColor = Colors.lightGreen;
-                      // } else {
-                      //   dropColor = kSecondColor;
-                      // }
                       dropdownValueCat = newValue; //CategoriaDrop
-                      // c++;
                       operacao.categoria = newValue;
                     });
                   },
@@ -178,7 +169,8 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
                   height: kMarginInput,
                 ),
                 RoundedButton(kSecondColor, 'Cadastrar', () async {
-                  var dataAtual = DateTime.now();
+                  var dataAtual = DateTime
+                      .now(); //TODO: Permitir escolha da data pelo usuário
                   operacao.dataHora = dataAtual.year.toString() +
                       "." +
                       dataAtual.month.toString() +

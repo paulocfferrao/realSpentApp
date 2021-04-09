@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:real_spent_app/components/menuItem.dart';
 import 'package:real_spent_app/constants.dart';
 import 'package:real_spent_app/model/Usuario.dart';
+import 'package:real_spent_app/views/relatorio_screen.dart';
 
 class Menu extends StatelessWidget {
   const Menu({
@@ -28,7 +29,7 @@ class Menu extends StatelessWidget {
           MenuItem(
             texto: "Relatórios",
             onTapF: () {
-              //todo: Programar tela de relatórios
+              Navigator.pushNamed(context, Relatorio_screen.id);
             },
           ),
           MenuItem(

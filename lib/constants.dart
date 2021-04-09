@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
+import 'package:intl/intl.dart';
 
 //Cor de fundo
 const kBackgroundColor = Colors.white; //Color(0xFFF2B705);
 
 //Segunda cor é usada em botões e outros detalhes
-const kThirdColor = Color(0xFF1BD9C4);
+//const kSecondColor = Color(0xFF1BD9C4);
 
 const kSecondColor = Color(0xFF8C0078);
 
@@ -29,6 +30,8 @@ const kOptionsTextStyle = TextStyle(
 );
 var kTextMoeda = MoneyMaskedTextController(decimalSeparator: ",", precision: 2);
 
+var kShowDateFormat = DateFormat('dd/MM/yyyy');
+//todo dbDateFormat
 const kTextStyle = TextStyle(
   fontFamily: kMainFont,
   fontSize: 25,
@@ -50,13 +53,13 @@ const kOutcomeTextStyle = TextStyle(
   fontFamily: kMainFont,
 );
 const kIncomeTextStyle = TextStyle(
-  color: kThirdColor,
+  color: Colors.greenAccent,
   fontWeight: FontWeight.bold,
   fontSize: 50.0,
   fontFamily: kMainFont,
 );
 const kInTextStyle = TextStyle(
-  color: kThirdColor,
+  color: Colors.greenAccent,
   fontWeight: FontWeight.bold,
   fontSize: 20.0,
   fontFamily: kMainFont,

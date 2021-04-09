@@ -96,3 +96,4 @@ class Operacao {
     operacoes.doc(id).update(map);
   }
 }
+//todo: função para retornar lista de operações

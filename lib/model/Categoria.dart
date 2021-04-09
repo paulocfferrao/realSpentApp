@@ -25,7 +25,6 @@ class Categoria {
       for (var categoria in snapshot.docs) {
         globals.gCategorias.add(categoria.data()['descricao']);
       }
-      print("rodou");
     }
   }
 

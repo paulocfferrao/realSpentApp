@@ -4,7 +4,7 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:real_spent_app/components/rounded_button.dart';
 import 'package:real_spent_app/constants.dart';
 import 'package:real_spent_app/model/Usuario.dart';
-import 'package:real_spent_app/util/utilFirebase.dart';
+import 'package:real_spent_app/util/dialogs.dart';
 import 'package:real_spent_app/views/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -16,15 +16,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool showSpinner = false;
   final _auth = FirebaseAuth.instance;
-  // FirebaseUser loggedInUser;
-  // String email;
-  // String password;
+
   Usuario usuario = Usuario.vazio();
-  // @override
-  // void initState() {
-  //
-  //   super.initState();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -87,28 +80,26 @@ class _LoginScreenState extends State<LoginScreen> {
                           showSpinner = false;
                         });
                         Navigator.pushNamed(context, Home_screen.id);
-                        //UtilFirebase.testUser(context);
-                        // Navigator.pop(context);
-                        // Navigator.pushNamed(context, Home_screen.id);
                       } else {
                         setState(() {
                           showSpinner = false;
                         });
-                        // AlertasUteis().alertaSimples(
-                        //     context,
-                        //     "Atenção",
-                        //     "Usuário ou senha incorretos",
-                        //     "Por favor tente novamente");
+                        AlertasUteis().alertaSimples(
+                            context,
+                            "Atenção",
+                            "Usuário ou senha incorretos",
+                            "Por favor tente novamente");
                       }
                     } on Exception catch (e) {
                       setState(() {
                         showSpinner = false;
                       });
-                      //todo: AlertasUteis().alertaSimples( -> Utilizado em excluir
-                      //     context,
-                      //     "Atenção",
-                      //     "Usuário ou senha incorretos",
-                      //     "Por favor tente novamente");
+
+                      AlertasUteis().alertaSimples(
+                          context,
+                          "Atenção",
+                          "Usuário ou senha incorretos",
+                          "Por favor tente novamente");
                       print(e);
                     }
                   }),

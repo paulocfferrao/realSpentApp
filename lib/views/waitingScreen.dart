@@ -28,23 +28,27 @@ class _WaitingScreenState extends State<WaitingScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kSecondColor,
+      //backgroundColor: kSecondColor,
       body: SizedBox(
         width: double.infinity,
         height: double.infinity,
-        child: Center(
-          child: TextLiquidFill(
-            text: 'Real \$pent',
-            waveColor: Colors.white,
-            boxBackgroundColor: Colors.greenAccent,
-            textStyle: TextStyle(
-                fontSize: 80.0,
-                fontWeight: FontWeight.bold,
-                fontFamily: kMainFont,
-                letterSpacing: 10),
-            boxHeight: 300,
-          ),
+        child: Container(
+          height: 200.0,
+          child: Image.asset('images/logo.png'),
         ),
+        // Center(
+        //   child: TextLiquidFill(
+        //     text: 'Real \$pent',
+        //     waveColor: Colors.white,
+        //     boxBackgroundColor: Colors.greenAccent,
+        //     textStyle: TextStyle(
+        //         fontSize: 80.0,
+        //         fontWeight: FontWeight.bold,
+        //         fontFamily: kMainFont,
+        //         letterSpacing: 10),
+        //     boxHeight: 300,
+        //   ),
+        // ),
       ),
     );
   }

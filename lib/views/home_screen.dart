@@ -1,11 +1,8 @@
-import 'dart:math';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:real_spent_app/components/ListaOperacoes.dart';
 import 'package:real_spent_app/components/menu.dart';
 import 'package:real_spent_app/constants.dart';
-import 'package:real_spent_app/model/Operacao.dart';
 import 'package:real_spent_app/util/buildValueListenableBuilder.dart';
 import 'package:real_spent_app/util/datas.dart';
 import 'package:real_spent_app/views/operacao_screen.dart';

@@ -53,20 +53,10 @@ class _ListaOperacoesState extends State<ListaOperacoes> {
         globals.gTotalSaidas.value = totalSaidas;
         globals.gTotal.value = totalEntradas - totalSaidas;
 
-        print(globals.gTotalSaidas.toString() + " --Saídas - ListaOperações");
-        print(
-            globals.gTotalEntradas.toString() + " --Entradas - ListaOperações");
-
         for (var op in listaOperacoes) {
           componentes.add(componenteOperacao(
               op.descricao, op.categoria, op.valor, op.tipo, op.id, context));
         }
-
-        // if (!globals.flag) {
-        //   Navigator.pop(context);
-        //   Navigator.pushNamed(context, Home_screen.id);
-        //   globals.flag = true;
-        // }
       });
     }
   }
