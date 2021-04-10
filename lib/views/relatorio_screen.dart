@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:real_spent_app/components/rounded_button.dart';
 import 'package:real_spent_app/constants.dart';
 import 'package:real_spent_app/globals.dart' as globals;
+import 'package:real_spent_app/model/Operacao.dart';
 
 String dropdownValueCat = 'Selecione a categoria';
 
@@ -141,18 +142,33 @@ class _Relatorio_screenState extends State<Relatorio_screen> {
               SizedBox(
                 height: 20.0,
               ),
-              RoundedButton(kSecondColor, 'GERAR RELATÓRIO', () {
+              RoundedButton(kSecondColor, 'GERAR RELATÓRIO', () async {
                 //todo: Gerar relatório
+                double entradas, saidas, total = 0.0;
+                String categoria = dropdownValueCat == "Selecione a categoria"
+                    ? "Todas"
+                    : dropdownValueCat;
 
-                // Mostra modal
+                List lista = await Operacao.getOperacoes(
+                    DateTime.parse(initialDate),
+                    DateTime.parse(finalDate),
+                    dropdownValueCat);
+
+                for (Operacao op in lista) {
+                  if (op.tipo == "Entrada") {
+                    entradas += double.parse(op.valor.replaceAll(",", "."));
+                  } else if (op.tipo == "Saída") {
+                    saidas += double.parse(op.valor.replaceAll(",", "."));
+                  }
+                }
+                total = entradas - saidas;
+
+                // todo: Mostra modal
                 // Categoria = dropdownValueCat / todos
                 // Periodo initialDate até finalDate
                 // Entradas: R$ xxx,xx
                 // Saídas: R$ xxx,xx
                 // Total: R$ xxx,xx > Padrão de cores da home
-
-                /*todo: função que retorne lista de operações, pode ser utilizada para home_screen e histórico
-                       Parametros: data inicial, data final, categoria, usuario*/
               }),
             ],
           ),

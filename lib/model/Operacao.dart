@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:real_spent_app/globals.dart' as globals;
+import 'package:real_spent_app/model/Usuario.dart';
+import 'package:real_spent_app/util/datas.dart';
 
 final operacoes = FirebaseFirestore.instance.collection("operacoes");
 
@@ -95,5 +96,47 @@ class Operacao {
     var map = operacao.toJson();
     operacoes.doc(id).update(map);
   }
+
+  static Future<List<Operacao>> getOperacoes(
+      DateTime dataInicial, DateTime dataFinal, String categoria) async {
+    /*função que retorne lista de operações, pode ser utilizada para home_screen e histórico
+                       Parametros: data inicial, data final, categoria, usuario*/
+    List<Operacao> listaOperacoes;
+    String usuario = auth.currentUser.email;
+
+    if (categoria == "" || categoria == "Selecione a categoria") {
+      categoria = "todos";
+    }
+
+    if (dataInicial == null ||
+        dataFinal == null ||
+        usuario == "" ||
+        usuario == null) {
+      //todo: erro
+    }
+
+    await for (var snapshot in operacoes.snapshots()) {
+      listaOperacoes.clear();
+
+      for (var operacao in snapshot.docs) {
+        Operacao novaOperacao = Operacao.vazio();
+        novaOperacao.usuario = operacao.data()['usuario'];
+        novaOperacao.dataHora = operacao.data()['dataHora'];
+        novaOperacao.categoria = operacao.data()['categoria'];
+
+        if (usuario == novaOperacao.usuario &&
+            (novaOperacao.categoria == categoria || categoria == "todos") &&
+            opDentroPeriodo(novaOperacao.dataHora, dataInicial, dataFinal)) {
+          novaOperacao.descricao = operacao.data()['descricao'];
+          novaOperacao.tipo = operacao.data()['tipo'];
+          novaOperacao.valor = operacao.data()['valor'];
+
+          novaOperacao.id = operacao.id;
+          listaOperacoes.add(novaOperacao);
+        }
+      }
+    }
+
+    return listaOperacoes;
+  }
 }
-//todo: função para retornar lista de operações

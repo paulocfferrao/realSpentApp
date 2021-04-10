@@ -4,6 +4,7 @@ import 'package:real_spent_app/components/componente_operacao.dart';
 import 'package:real_spent_app/model/Operacao.dart';
 import 'package:real_spent_app/model/Usuario.dart';
 import 'package:real_spent_app/globals.dart' as globals;
+import 'package:real_spent_app/util/datas.dart';
 
 class ListaOperacoes extends StatefulWidget {
   @override
@@ -73,23 +74,5 @@ class _ListaOperacoesState extends State<ListaOperacoes> {
       //crossAxisAlignment: CrossAxisAlignment.stretch,
       children: componentes,
     );
-  }
-}
-
-bool mesCorrente(String dataHora) {
-  ///EX.:2021.11.19.16.58
-  ///    2021.3.22.21.47
-
-  String mesAtual = new DateTime.now().month.toString();
-  int inicio = dataHora.indexOf(".") + 1;
-  String aux = dataHora.substring(inicio);
-  int fim = aux.indexOf(".") + inicio;
-  String mesOperacao =
-      dataHora.substring(inicio, fim); //erro para meses com dois digitos
-
-  if (mesOperacao == mesAtual) {
-    return true;
-  } else {
-    return false;
   }
 }
