@@ -4,7 +4,7 @@ import 'package:real_spent_app/components/ListaOperacoes.dart';
 import 'package:real_spent_app/components/menu.dart';
 import 'package:real_spent_app/constants.dart';
 import 'package:real_spent_app/util/buildValueListenableBuilder.dart';
-import 'package:real_spent_app/util/datas.dart';
+import 'package:real_spent_app/util/funcoes.dart';
 import 'package:real_spent_app/views/operacao_screen.dart';
 import 'package:real_spent_app/globals.dart' as globals;
 
@@ -47,6 +47,7 @@ class _Home_screenState extends State<Home_screen>
         onPressed: () {
           //tempAtualizaCaterias();
           Navigator.pushNamed(context, OperacaoScreen.id);
+
           //Categoria().addCategoria("Alimentação");
         },
         label: Text('Adicionar'),

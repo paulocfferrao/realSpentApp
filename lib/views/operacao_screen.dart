@@ -4,7 +4,7 @@ import 'package:real_spent_app/components/rounded_button.dart';
 import 'package:real_spent_app/constants.dart';
 import 'package:real_spent_app/model/Operacao.dart';
 import 'package:real_spent_app/model/Usuario.dart';
-import 'package:real_spent_app/util/ScreenArguments.dart';
+import 'file:///C:/Users/pfpau/AndroidStudioProjects/real_spent_app/lib/model/ScreenArguments.dart';
 import 'package:real_spent_app/globals.dart' as globals;
 
 class OperacaoScreen extends StatefulWidget {

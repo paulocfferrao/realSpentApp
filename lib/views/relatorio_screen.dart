@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:real_spent_app/components/rounded_button.dart';
 import 'package:real_spent_app/constants.dart';
 import 'package:real_spent_app/globals.dart' as globals;
 import 'package:real_spent_app/model/Operacao.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:real_spent_app/util/funcoes.dart';
 
 String dropdownValueCat = 'Selecione a categoria';
 
@@ -143,15 +146,18 @@ class _Relatorio_screenState extends State<Relatorio_screen> {
                 height: 20.0,
               ),
               RoundedButton(kSecondColor, 'GERAR RELATÓRIO', () async {
-                //todo: Gerar relatório
-                double entradas, saidas, total = 0.0;
+                double entradas = 0.0;
+                double saidas = 0.0;
+                double total = 0.0;
                 String categoria = dropdownValueCat == "Selecione a categoria"
                     ? "Todas"
                     : dropdownValueCat;
 
+                DateFormat dateFormat = DateFormat('dd/MM/yyyy');
+
                 List lista = await Operacao.getOperacoes(
-                    DateTime.parse(initialDate),
-                    DateTime.parse(finalDate),
+                    dateFormat.parse(initialDate),
+                    dateFormat.parse(finalDate),
                     dropdownValueCat);
 
                 for (Operacao op in lista) {
@@ -161,20 +167,140 @@ class _Relatorio_screenState extends State<Relatorio_screen> {
                     saidas += double.parse(op.valor.replaceAll(",", "."));
                   }
                 }
+
                 total = entradas - saidas;
 
-                // todo: Mostra modal
-                // Categoria = dropdownValueCat / todos
-                // Periodo initialDate até finalDate
-                // Entradas: R$ xxx,xx
-                // Saídas: R$ xxx,xx
-                // Total: R$ xxx,xx > Padrão de cores da home
+                showMaterialModalBottomSheet(
+                  context: context,
+                  builder: (context) => Container(
+                    height: 300,
+                    color: Colors.grey,
+                    child: Container(
+                      height: 300,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Center(
+                            child: Container(
+                              height: 4,
+                              width: 70,
+                              margin: EdgeInsets.symmetric(vertical: 8),
+                              decoration: BoxDecoration(
+                                color: Colors.black26,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "$initialDate - $finalDate",
+                                  style: TextStyle(
+                                    fontFamily: kMainFont,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  "Categoria: $categoria",
+                                  //textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                    fontFamily: kMainFont,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Entradas: ",
+                                      style: TextStyle(
+                                        fontFamily: kMainFont,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      dp(entradas, 2).toString(),
+                                      style: kIncomeTextStyle.copyWith(
+                                          fontSize: 20),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Saídas: ",
+                                      style: TextStyle(
+                                        fontFamily: kMainFont,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      dp(saidas, 2).toString(),
+                                      style: kOutcomeTextStyle.copyWith(
+                                          fontSize: 20),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Total: ",
+                                      style: TextStyle(
+                                        fontFamily: kMainFont,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      dp(total, 2).toString(),
+                                      style: kOutcomeTextStyle.copyWith(
+                                        fontSize: 20,
+                                        color: total >= 0.0
+                                            ? Colors.greenAccent
+                                            : Colors.red,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
               }),
             ],
           ),
         ),
       ),
     );
-    //throw UnimplementedError();
   }
 }

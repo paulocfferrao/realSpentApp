@@ -1,8 +1,6 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:real_spent_app/model/Categoria.dart';
 import 'package:real_spent_app/util/utilFirebase.dart';
-import 'package:real_spent_app/constants.dart';
 
 class WaitingScreen extends StatefulWidget {
   static const String id = '/waiting';
@@ -36,19 +34,6 @@ class _WaitingScreenState extends State<WaitingScreen>
           height: 200.0,
           child: Image.asset('images/logo.png'),
         ),
-        // Center(
-        //   child: TextLiquidFill(
-        //     text: 'Real \$pent',
-        //     waveColor: Colors.white,
-        //     boxBackgroundColor: Colors.greenAccent,
-        //     textStyle: TextStyle(
-        //         fontSize: 80.0,
-        //         fontWeight: FontWeight.bold,
-        //         fontFamily: kMainFont,
-        //         letterSpacing: 10),
-        //     boxHeight: 300,
-        //   ),
-        // ),
       ),
     );
   }

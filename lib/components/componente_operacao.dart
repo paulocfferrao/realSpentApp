@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:real_spent_app/constants.dart';
 import 'package:real_spent_app/model/Operacao.dart';
 import 'package:confirm_dialog/confirm_dialog.dart';
-import 'package:real_spent_app/util/ScreenArguments.dart';
+import 'file:///C:/Users/pfpau/AndroidStudioProjects/real_spent_app/lib/model/ScreenArguments.dart';
 import 'package:real_spent_app/views/home_screen.dart';
 import 'package:real_spent_app/views/operacao_screen.dart';
 

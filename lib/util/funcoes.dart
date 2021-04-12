@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:intl/intl.dart';
 
 String mesAno() {
@@ -108,4 +110,9 @@ bool opDentroPeriodo(String dtOp, dtIni, dtFim) {
   } else {
     return false;
   }
+}
+
+double dp(double val, int places) {
+  double mod = pow(10.0, places);
+  return ((val * mod).round().toDouble() / mod);
 }

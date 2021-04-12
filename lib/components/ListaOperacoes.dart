@@ -4,7 +4,7 @@ import 'package:real_spent_app/components/componente_operacao.dart';
 import 'package:real_spent_app/model/Operacao.dart';
 import 'package:real_spent_app/model/Usuario.dart';
 import 'package:real_spent_app/globals.dart' as globals;
-import 'package:real_spent_app/util/datas.dart';
+import 'package:real_spent_app/util/funcoes.dart';
 
 class ListaOperacoes extends StatefulWidget {
   @override
