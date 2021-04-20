@@ -99,7 +99,6 @@ class Operacao {
 
   static Future<List<Operacao>> getOperacoes(
       DateTime dataInicial, DateTime dataFinal, String categoria) async {
-    print("A");
     /*função que retorne lista de operações, pode ser utilizada para home_screen e histórico
                        Parametros: data inicial, data final, categoria, usuario*/
     List<Operacao> listaOperacoes = [];
@@ -112,11 +111,9 @@ class Operacao {
     if (dataInicial == null || dataFinal == null) {
       //todo: erro
     }
-    print("B");
 
     await for (var snapshot in operacoes.snapshots()) {
       listaOperacoes.clear();
-      print("C");
 
       for (var operacao in snapshot.docs) {
         Operacao novaOperacao = Operacao.vazio();
@@ -124,13 +121,9 @@ class Operacao {
         novaOperacao.dataHora = operacao.data()['dataHora'];
         novaOperacao.categoria = operacao.data()['categoria'];
 
-        print("D");
-
         if (usuario == novaOperacao.usuario &&
             (novaOperacao.categoria == categoria || categoria == "todos") &&
             opDentroPeriodo(novaOperacao.dataHora, dataInicial, dataFinal)) {
-          print("E");
-
           novaOperacao.descricao = operacao.data()['descricao'];
           novaOperacao.tipo = operacao.data()['tipo'];
           novaOperacao.valor = operacao.data()['valor'];
@@ -139,7 +132,6 @@ class Operacao {
           listaOperacoes.add(novaOperacao);
         }
       }
-      print("F");
 
       return listaOperacoes;
     }
