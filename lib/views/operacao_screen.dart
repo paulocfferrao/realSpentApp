@@ -159,6 +159,7 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
                       kTextMoeda, //todo: Bug na edição de operação: mostrando um zero a menos
                   textAlign: TextAlign.center,
                   onChanged: (value) {
+                    print(value.toString());
                     operacao.valor =
                         kTextMoeda.numberValue.toString().replaceAll(".", ",");
                   },

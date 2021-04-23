@@ -23,6 +23,7 @@ class _Home_screenState extends State<Home_screen>
 
   @override
   Widget build(BuildContext context) {
+    preenche(context);
     var valores = [
       Vlb.buildValueListenableBuilder(globals.gTotalEntradas, kIncomeTextStyle),
       Vlb.buildValueListenableBuilder(globals.gTotalSaidas, kOutcomeTextStyle),
@@ -102,11 +103,7 @@ class _Home_screenState extends State<Home_screen>
               SizedBox(
                 width: double.infinity,
                 height: heightScreen - 170 - 94,
-                child: ListView(
-                  children: [
-                    ListaOperacoes(),
-                  ],
-                ),
+                child: Vlb.buildValueListenableBuilderList(),
               ),
             ],
           );

@@ -1,5 +1,5 @@
 import 'funcoes.dart';
-
+import 'package:real_spent_app/globals.dart' as globals;
 import 'package:flutter/cupertino.dart';
 
 class Vlb {
@@ -12,6 +12,20 @@ class Vlb {
         return Text(
           "R\$ $value",
           style: style,
+        );
+      },
+    );
+  }
+
+  static ValueListenableBuilder<List<Widget>>
+      buildValueListenableBuilderList() {
+    return ValueListenableBuilder(
+      valueListenable: globals.gComponentes,
+      builder: (context, value, _) {
+        ///preenche(context);
+        value = globals.gComponentes.value;
+        return ListView(
+          children: value,
         );
       },
     );

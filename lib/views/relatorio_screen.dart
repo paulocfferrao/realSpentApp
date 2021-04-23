@@ -146,6 +146,7 @@ class _Relatorio_screenState extends State<Relatorio_screen> {
                 height: 20.0,
               ),
               RoundedButton(kSecondColor, 'GERAR RELATÓRIO', () async {
+                //todo: testar
                 double entradas = 0.0;
                 double saidas = 0.0;
                 double total = 0.0;

@@ -6,6 +6,7 @@ ValueNotifier<double> gTotalEntradas = ValueNotifier(0.0);
 ValueNotifier<double> gTotalSaidas = ValueNotifier(0.0);
 ValueNotifier<double> gTotal = ValueNotifier(0.0);
 
-List<String> gCategorias =
-    []; // Atualizar sempre após realizar qualquer manutenção em categorias.
-//bool flag = false;
+// Atualizar sempre após realizar qualquer manutenção em categorias.
+List<String> gCategorias = [];
+
+ValueNotifier<List<Widget>> gComponentes = ValueNotifier([]);

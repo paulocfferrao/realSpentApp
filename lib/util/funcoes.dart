@@ -1,6 +1,9 @@
 import 'dart:math';
-
+import 'package:flutter/cupertino.dart';
+import 'package:real_spent_app/components/componente_operacao.dart';
+import 'package:real_spent_app/globals.dart' as globals;
 import 'package:intl/intl.dart';
+import 'package:real_spent_app/model/Operacao.dart';
 
 String mesAno() {
   var dataAtual = DateTime.now();
@@ -211,4 +214,38 @@ bool isLeap(year) {
   } else {
     return false;
   }
+}
+
+preenche(context) async {
+  var _totalEntradas = 0.0;
+  var _totalSaidas = 0.0;
+  final DateTime data = DateTime.now();
+  final int ultimoDia = getLastDay(data.month, data.year);
+  final DateTime dtInicial = DateTime(data.year, data.month);
+  final DateTime dtFinal = DateTime(data.year, data.month, ultimoDia);
+  List<Operacao> listaOperacoes =
+      await Operacao.getOperacoes(dtInicial, dtFinal, "");
+  List<Widget> componentes = [];
+
+  listaOperacoes.sort((a, b) =>
+      b.dataHora.compareTo(a.dataHora)); //todo: ordenação por data falhando
+
+  for (var op in listaOperacoes) {
+    print(op.dataHora);
+    if (op.tipo == "Entrada") {
+      _totalEntradas += double.parse(op.valor.replaceAll(",", "."));
+    } else if (op.tipo == "Saída") {
+      _totalSaidas += double.parse(op.valor.replaceAll(",", "."));
+    }
+  }
+
+  globals.gTotalEntradas.value = _totalEntradas;
+  globals.gTotalSaidas.value = _totalSaidas;
+  globals.gTotal.value = _totalEntradas - _totalSaidas;
+
+  for (var op in listaOperacoes) {
+    componentes.add(componenteOperacao(
+        op.descricao, op.categoria, op.valor, op.tipo, op.id, context));
+  }
+  globals.gComponentes.value = componentes;
 }

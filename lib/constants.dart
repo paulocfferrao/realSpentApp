@@ -28,7 +28,7 @@ const kOptionsTextStyle = TextStyle(
   fontSize: 30,
   fontWeight: FontWeight.bold,
 );
-var kTextMoeda = MoneyMaskedTextController(decimalSeparator: ",", precision: 2);
+var kTextMoeda = MoneyMaskedTextController();
 
 var kShowDateFormat = DateFormat('dd/MM/yyyy');
 //todo dbDateFormat

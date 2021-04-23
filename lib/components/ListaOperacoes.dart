@@ -1,8 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:real_spent_app/components/componente_operacao.dart';
 import 'package:real_spent_app/model/Operacao.dart';
-import 'package:real_spent_app/model/Usuario.dart';
 import 'package:real_spent_app/globals.dart' as globals;
 import 'package:real_spent_app/util/funcoes.dart';
 
@@ -23,10 +21,12 @@ class _ListaOperacoesState extends State<ListaOperacoes> {
     listaOperacoes = await Operacao.getOperacoes(dtInicial, dtFinal, "");
 
     setState(() {
-      listaOperacoes.sort((a, b) => b.dataHora.compareTo(a.dataHora));
+      listaOperacoes.sort((a, b) =>
+          b.dataHora.compareTo(a.dataHora)); //todo: ordenação por data falhando
       var _totalEntradas = 0.0;
       var _totalSaidas = 0.0;
       for (var op in listaOperacoes) {
+        print(op.dataHora);
         if (op.tipo == "Entrada") {
           _totalEntradas += double.parse(op.valor.replaceAll(",", "."));
         } else if (op.tipo == "Saída") {
@@ -39,7 +39,7 @@ class _ListaOperacoesState extends State<ListaOperacoes> {
       globals.gTotal.value = _totalEntradas - _totalSaidas;
 
       for (var op in listaOperacoes) {
-        componentes.add(componenteOperacao(
+        globals.gComponentes.value.add(componenteOperacao(
             op.descricao, op.categoria, op.valor, op.tipo, op.id, context));
       }
     });
