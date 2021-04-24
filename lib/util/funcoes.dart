@@ -249,3 +249,13 @@ preenche(context) async {
   }
   globals.gComponentes.value = componentes;
 }
+
+String doubleToString(double valor) {
+  //Método toString nativo remove a formatação
+  //função que adiciona mais um zero a esquerda quando nescessário
+  var temp = valor.toString().replaceAll(".", ",");
+
+  return temp.substring(temp.indexOf(",") + 1, temp.length).length > 1
+      ? temp
+      : temp + "0";
+}

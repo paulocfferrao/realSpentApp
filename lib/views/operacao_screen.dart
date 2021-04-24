@@ -6,6 +6,8 @@ import 'package:real_spent_app/model/Operacao.dart';
 import 'package:real_spent_app/model/Usuario.dart';
 import 'file:///C:/Users/pfpau/AndroidStudioProjects/real_spent_app/lib/model/ScreenArguments.dart';
 import 'package:real_spent_app/globals.dart' as globals;
+import 'package:real_spent_app/util/funcoes.dart';
+import 'package:real_spent_app/views/home_screen.dart';
 
 class OperacaoScreen extends StatefulWidget {
   static const String id = '/operacao';
@@ -155,13 +157,10 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
                   height: kMarginInput,
                 ),
                 TextFormField(
-                  controller:
-                      kTextMoeda, //todo: Bug na edição de operação: mostrando um zero a menos
+                  controller: kTextMoeda,
                   textAlign: TextAlign.center,
                   onChanged: (value) {
-                    print(value.toString());
-                    operacao.valor =
-                        kTextMoeda.numberValue.toString().replaceAll(".", ",");
+                    operacao.valor = doubleToString(kTextMoeda.numberValue);
                   },
                   keyboardType: TextInputType.number,
                   decoration: kInputDecoration.copyWith(hintText: 'Valor'),
@@ -184,16 +183,17 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
 
                   operacao.usuario = auth.currentUser.email;
                   if (args == null) {
-                    operacao.addOperacao(operacao);
+                    await operacao.addOperacao(operacao);
                   } else {
-                    Operacao.editarOperacao(args.id, operacao);
+                    await Operacao.editarOperacao(args.id, operacao);
                   }
                   // operacao = null;
                   //globals.flag = false;
                   c = 0;
+                  //preenche(context);
                   Navigator.pop(context);
 
-                  //Navigator.pushNamed(context, Home_screen.id);
+                  Navigator.pushNamed(context, Home_screen.id);
                 }),
                 //
               ],

@@ -9,8 +9,9 @@ class Vlb {
       valueListenable: globalValue,
       builder: (context, value, _) {
         value = dp(value, 2);
+        var str = "R\$ " + doubleToString(value);
         return Text(
-          "R\$ $value",
+          str,
           style: style,
         );
       },
