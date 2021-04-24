@@ -171,15 +171,16 @@ class _OperacaoScreenState extends State<OperacaoScreen> {
                 RoundedButton(kSecondColor, 'Cadastrar', () async {
                   var dataAtual = DateTime
                       .now(); //TODO: Permitir escolha da data pelo usuário
+
                   operacao.dataHora = dataAtual.year.toString() +
                       "." +
-                      dataAtual.month.toString() +
+                      zeroAEsquerda(dataAtual.month) +
                       "." +
-                      dataAtual.day.toString() +
+                      zeroAEsquerda(dataAtual.day) +
                       "." +
-                      dataAtual.hour.toString() +
+                      zeroAEsquerda(dataAtual.hour) +
                       "." +
-                      dataAtual.minute.toString();
+                      zeroAEsquerda(dataAtual.minute);
 
                   operacao.usuario = auth.currentUser.email;
                   if (args == null) {

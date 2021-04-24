@@ -136,4 +136,16 @@ class Operacao {
       return listaOperacoes;
     }
   }
+
+  static ordenaOperacoesDataDec(List<Operacao> operacoes) {
+    List<Operacao> aux = [];
+    int tam = operacoes.length;
+    for (int i = 0; i <= tam; i++) {
+      // aux[i] = operacoes[i];
+      print(i.toString() + "Entrou");
+      //
+      // aux[i].dataHora = "";
+
+    }
+  }
 }

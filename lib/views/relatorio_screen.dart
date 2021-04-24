@@ -239,7 +239,7 @@ class _Relatorio_screenState extends State<Relatorio_screen> {
                                       ),
                                     ),
                                     Text(
-                                      dp(entradas, 2).toString(),
+                                      doubleToString(dp(entradas, 2)),
                                       style: kIncomeTextStyle.copyWith(
                                           fontSize: 20),
                                     ),
@@ -259,7 +259,7 @@ class _Relatorio_screenState extends State<Relatorio_screen> {
                                       ),
                                     ),
                                     Text(
-                                      dp(saidas, 2).toString(),
+                                      doubleToString(dp(saidas, 2)),
                                       style: kOutcomeTextStyle.copyWith(
                                           fontSize: 20),
                                     ),
@@ -279,7 +279,7 @@ class _Relatorio_screenState extends State<Relatorio_screen> {
                                       ),
                                     ),
                                     Text(
-                                      dp(total, 2).toString(),
+                                      doubleToString(dp(total, 2)),
                                       style: kOutcomeTextStyle.copyWith(
                                         fontSize: 20,
                                         color: total >= 0.0

@@ -101,12 +101,18 @@ bool mesCorrente(String dataHora) {
   }
 }
 
-bool opDentroPeriodo(String dtOp, dtIni, dtFim) {
+bool opDentroPeriodo(String dtOp, dtIni, DateTime dtFim) {
   ///EX.:2021.11.19.16.58
   ///    2021.3.2.21.47
 
   DateFormat dateFormat = DateFormat('yyyy.MM.dd.hh.mm');
   var dtOpO = dateFormat.parse(dtOp); //Converte data String em objeto
+
+  if (dtOpO.year == DateTime.now().year &&
+      dtOpO.month == DateTime.now().month &&
+      dtOpO.day == DateTime.now().day) {
+    dtFim = DateTime(dtFim.year, dtFim.month, dtFim.day + 1);
+  }
 
   if (dtOpO.isAfter(dtIni) && dtOpO.isBefore(dtFim)) {
     return true;
@@ -252,10 +258,14 @@ preenche(context) async {
 
 String doubleToString(double valor) {
   //Método toString nativo remove a formatação
-  //função que adiciona mais um zero a esquerda quando nescessário
+  //função que adiciona mais um zero a direita quando nescessário
   var temp = valor.toString().replaceAll(".", ",");
 
   return temp.substring(temp.indexOf(",") + 1, temp.length).length > 1
       ? temp
       : temp + "0";
+}
+
+String zeroAEsquerda(int valor) {
+  return valor < 10 ? "0" + valor.toString() : valor.toString();
 }
